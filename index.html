@@ -218,13 +218,13 @@
 					</div>
 
 					<div class="section products-similar">
-						<h3 class="heading-2 products-similar__heading-2">You may also like</h3>
+						<h2 class="heading-2 products-similar__heading-2">You may also like</h2>
 						<div class="products-grid">
 							<div class="products-grid__item">
 								<a href="#" tabindex="-1" class="products-grid__item-photo" aria-hidden="true">
 									<img src="images/photo2.jpg" class="products-grid__item-picture" srcset="images/photo2_x2.jpg 2x" alt="">
 								</a>
-								<div class="products-grid__item-name"><a href="#">Product name</a></div>
+								<h3 class="products-grid__item-name"><a href="#">Product name</a></h3>
 								<ul aria-label="Product name colors" class="colors-palette products-grid__item-colors-palette">
 									<li class="colors-palette__item">
 										<span class="colors-palette__sample" style="background-color: #C88252;"></span>
@@ -251,7 +251,7 @@
 								<a href="#" tabindex="-1" class="products-grid__item-photo" aria-hidden="true">
 									<img src="images/photo3.jpg" class="products-grid__item-picture" srcset="images/photo3_x2.jpg 2x" alt="">
 								</a>
-								<div class="products-grid__item-name"><a href="#">Very long product name for testing purposes</a></div>
+								<h3 class="products-grid__item-name"><a href="#">Very long product name for testing purposes</a></h3>
 								<ul aria-label="Very long product name for testing purposes colors" class="colors-palette products-grid__item-colors-palette">
 									<li class="colors-palette__item">
 										<span class="colors-palette__sample" style="background-color: red;"></span>
@@ -277,7 +277,7 @@
 								<a href="#" tabindex="-1" class="products-grid__item-photo" aria-hidden="true">
 									<img src="images/photo4.jpg" class="products-grid__item-picture" srcset="images/photo4_x2.jpg 2x">
 								</a>
-								<div class="products-grid__item-name"><a href="#">Product name</a></div>
+								<h3 class="products-grid__item-name"><a href="#">Product name</a></h3>
 								<ul aria-label="Product name colors" class="colors-palette products-grid__item-colors-palette">
 									<li class="colors-palette__item">
 										<span class="colors-palette__sample" style="background-color: #C88252;"></span>
@@ -309,8 +309,8 @@
 			<footer class="footer">
 				<div class="container footer__container">
 					<div class="footer__columns">
-						<section class="footer__col">
-							<h4 class="footer__heading">About</h4>
+						<section aria-labelledby="aboutHeading" class="footer__col">
+							<div id="aboutHeading" class="footer__heading">About</div>
 							<div class="footer__address">
 								<p>Susparsa Store</p>
 								<p>Geneva, Switzerland</p>
@@ -332,8 +332,8 @@
 								</ul>
 							</div>
 						</section>
-						<section class="footer__col">
-							<h4 class="footer__heading">Company</h4>
+						<section aria-labelledby="companyHeading" class="footer__col">
+							<div id="companyHeading" class="footer__heading">Company</div>
 							<nav aria-label="Footer primary">
 								<ul class="footer__list">
 									<li class="footer__list-item">
@@ -354,8 +354,8 @@
 								</ul>								
 							</nav>
 						</section>
-						<section class="footer__col">
-							<h4 class="footer__heading">Useful links</h4>
+						<section aria-labelledby="usefulLinksHeading" class="footer__col">
+							<div id="usefulLinksHeading" class="footer__heading">Useful links</div>
 							<div>
 								<ul class="footer__list">
 									<li class="footer__list-item">
@@ -376,9 +376,9 @@
 								</ul>									
 							</div>
 						</section>
-						<section class="footer__col">
-							<h4 class="footer__heading">Subscribe</h4>
-							<form class="form" action="#">
+						<section aria-labelledby="subscribeHeading" class="footer__col">
+							<div id="subscribeHeading" class="footer__heading">Subscribe</div>
+							<form aria-labelledby="subscribeHeading" class="form" action="#">
 								<div class="form__input-group">
 								<input class="input" type="email" name="email" id="email" placeholder="Email">
 								<button class="btn btn_primary">Subscribe</button>
