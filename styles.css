@@ -589,14 +589,12 @@ a:not(:has(*)):focus-visible {
 .product-card__left {
   width: 60%;
   padding-right: 32px;
-  order: 1;
   margin-bottom: 50px;
 }
 
 .product-card__right {
   width: 40%;
   padding-left: 32px;
-  order: 2;
   margin-bottom: 50px;
 }
 
