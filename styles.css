@@ -211,6 +211,19 @@ a:not(:has(*)):focus-visible {
   outline-offset: 1px;
 }
 
+.skip-link {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  transform: translateY(-50px);
+  transition: all 0.3s ease-in-out;
+}
+
+.skip-link:focus-visible {
+  transform: translateY(-24px);
+  opacity: 1;
+}
+
 .header {
   padding-top: 29px;
   padding-bottom: 31px;
@@ -236,6 +249,7 @@ a:not(:has(*)):focus-visible {
 
 .header__menu-main {
   width: 100%;
+  position: relative;
 }
 
 .menu {
@@ -249,16 +263,6 @@ a:not(:has(*)):focus-visible {
 .menu__item {
   margin-left: 17.5px;
   margin-right: 17.5px;
-}
-
-.menu__item--skip {
-  position: absolute;
-  transform: translateY(-100px);
-  transition: transform 0.3s ease-in-out;
-}
-
-.menu__item--skip:has(.menu__link:focus-visible) {
-  transform: translateY(-24px);
 }
 
 .menu__link {
@@ -356,6 +360,10 @@ a:not(:has(*)):focus-visible {
   border-top: 1px var(--border-color-light) solid;
   padding-top: 80px;
   padding-bottom: 30px;
+}
+
+.footer__container {
+  position: relative;
 }
 
 .footer__columns {
