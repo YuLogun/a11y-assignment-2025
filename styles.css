@@ -724,12 +724,15 @@ a:not(:has(*)):focus-visible {
   outline: none;
 }
 
-.size-guide-link-wrapper {
+.size-guide-open-wrapper {
   margin-top: 10px;
   padding: 10px 0;
 }
 
-.size-guide-link {
+.size-guide-open {
+  font-size: 16px;
+  letter-spacing: 0.025em;
+  color: -webkit-link;
   text-decoration: underline;
 }
 
@@ -819,10 +822,14 @@ a:not(:has(*)):focus-visible {
   line-height: 1;
 }
 
-.input-quantity__btn:hover {
+.input-quantity__btn:not([disabled]):hover {
   outline: 1px var(--border-color-primary) solid;
   z-index: 1;
   color: var(--text-color-primary);
+}
+
+.input-quantity__btn[disabled] {
+  cursor: not-allowed;
 }
 
 .input-quantity__btn:focus-visible {

@@ -12,13 +12,32 @@ window.addEventListener("DOMContentLoaded", () => {
     const inputField = input.querySelector('.input-quantity__field');
     const inputBtnIncrease = input.querySelector('.input-quantity__btn[data-action=increase]');
     const inputBtnDecrease = input.querySelector('.input-quantity__btn[data-action=decrease]');
+
+    function toggleDecreaseBtnAttrs(inputValue) {
+      const isValueValid = inputValue > 1;
+
+      if (isValueValid) {
+        inputBtnDecrease.removeAttribute('disabled');
+      } else  {
+        inputBtnDecrease.setAttribute('disabled', '1');
+      }
+    }
+
+    inputField.addEventListener('input', (evt) => {
+      toggleDecreaseBtnAttrs(evt.target.value)
+    });
     inputBtnIncrease.addEventListener('click', () => {
       const initialValue = inputField.value * 1;
-      inputField.value = initialValue + 1; 
+      const newValue = initialValue + 1;
+      inputField.value = newValue;
+      toggleDecreaseBtnAttrs(newValue)
     });
     inputBtnDecrease.addEventListener('click', () => {
       const initialValue = inputField.value * 1;
-      if (initialValue > 1) inputField.value = initialValue - 1;
+      const newValue = initialValue - 1;
+      toggleDecreaseBtnAttrs(newValue)
+
+      if (newValue > 0) inputField.value = newValue;
     });    
   });
 
