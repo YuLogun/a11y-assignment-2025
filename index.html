@@ -68,14 +68,16 @@
 							<form class="product-card__form" action="#">
 								<div class="product-card__parameter">
 									<label for="productSize" class="product-card__label">Size</label>
-									<select id="productSize" class="product-size">
+									<select id="productSize" class="product-size focusable">
 										<option value="xs">XS</option>
 										<option value="s">S</option>
 										<option value="m">M</option>
 										<option value="l">L</option>
 										<option value="xl">XL</option>
 									</select>
-									<a class="size-guide-link modal-target" href="#sizeGuide">Size Guide</a>
+									<div class="size-guide-link-wrapper">
+										<a class="size-guide-link modal-target" href="#sizeGuide">Size Guide</a>
+									</div>
 									<div class="modal">
 										<div class="modal-backdrop">
 											<div class="modal-body size-guide">
@@ -171,7 +173,7 @@
 									<label for="productQuantity" class="product-card__label">Quantity</label>
 									<div class="input-quantity">
 										<button type="button" class="input-quantity__btn" aria-label="decrease Quantity" data-action="decrease">&minus;</button>
-										<input type="number" class="input-quantity__field" id="productQuantity" name="product_quantity" value="1">
+										<input type="number" class="input-quantity__field focusable" id="productQuantity" name="product_quantity" value="1">
 										<button type="button" class="input-quantity__btn" aria-label="increase Quantity" data-action="increase">&plus;</button>
 									</div>
 								</div>
@@ -383,13 +385,13 @@
 							<form aria-labelledby="subscribeHeading" class="form" action="#">
 								<div class="form__input-group">
 								<label>
-									<input class="input" type="email" name="email" id="email" placeholder="Email">
+									<input class="input focusable" type="email" name="email" id="email" placeholder="Email">
 									<span class="v-h">Email</span>
 								</label>
 								<button class="btn btn_primary">Subscribe</button>
 								</div>
 								<label class="form__input-group">
-									<input class="checkbox" type="checkbox" name="agree" id="agree"> I agree to give you all my data
+									<input class="checkbox focusable" type="checkbox" name="agree" id="agree"> I agree to give you all my data
 								</label>
 							</form>
 						</section>

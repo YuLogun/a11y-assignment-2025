@@ -28,6 +28,7 @@
   --border-color-primary: #1a1f29;
   --border-color-light: #cccccc;
   --brand-blue: #171c8f;
+  --outline-color: #5D66E9;
 }
 
 * {
@@ -104,6 +105,16 @@ fieldset legend {
   margin: 0;
   border: none;
   padding: 0;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--outline-color);
+  outline-offset: 1px;
+}
+
+a:not(:has(*)):focus-visible {
+  border-radius: 4px;
 }
 
 .v-h {
@@ -193,6 +204,11 @@ fieldset legend {
   display: flex;
   gap: 10px;
   align-items: center;
+}
+
+.focusable:focus-visible {
+  outline: 2px solid var(--outline-color);
+  outline-offset: 1px;
 }
 
 .header {
@@ -705,12 +721,15 @@ fieldset legend {
   width: 100%;
   max-width: 300px;
   height: 50px;
+  outline: none;
+}
+
+.size-guide-link-wrapper {
+  margin-top: 10px;
+  padding: 10px 0;
 }
 
 .size-guide-link {
-  display: block;
-  margin-top: 10px;
-  padding: 10px 0;
   text-decoration: underline;
 }
 
@@ -835,6 +854,11 @@ fieldset legend {
 .input-radio {
   position: relative;
   display: block;
+}
+
+.input-radio:has(.input-radio__input:focus-visible) {
+  outline: 2px solid var(--outline-color);
+  outline-offset: 1px;
 }
 
 .input-radio__input {
