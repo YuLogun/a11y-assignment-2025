@@ -63,9 +63,7 @@ window.addEventListener("DOMContentLoaded", () => {
     modalTarget.addEventListener('click', ()=> {
       showModal(modalTarget);
 
-      const modalWindow = findActiveModalWindow();
-      const modalClose = modalWindow.querySelector('.js__modal-close');
-
+      const modalClose = findActiveModalCloseBtn();
       if (!modalClose) return;
 
       modalClose.focus();
@@ -89,35 +87,84 @@ window.addEventListener("DOMContentLoaded", () => {
     return document.documentElement.querySelector(`[data-modal-id=${modalId}]`)
   }
 
-  function listenToEscape(event) {
-    if (event.key === 'Escape') {
+  function findActiveModalCloseBtn() {
+    const modalWindow = findActiveModalWindow();
+    if (!modalWindow) return;
+
+    return modalWindow.querySelector('.js__modal-close');
+  }
+
+  function listenToKeyPress(event) {
+    const isEscapePressed = event.key === 'Escape';
+    const isTabPressed = event.key === 'Tab';
+    const isShiftTabPressed = isTabPressed && event.shiftKey;
+
+    if (isEscapePressed) {
       closeModal();
+
+      return;
     }
+
+    if (isTabPressed || isShiftTabPressed) {
+      const modalWindow = findActiveModalWindow();
+      const modalClose = findActiveModalCloseBtn();
+      const modalFocusableElements = modalWindow.querySelectorAll(
+          'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      const modalFocusableElementsLength = modalFocusableElements.length
+      const currentFocusedElement = document.activeElement;
+      const currentFocusedElementIndex = [...modalFocusableElements].indexOf(currentFocusedElement);
+
+      if (currentFocusedElementIndex === modalFocusableElementsLength - 1) {
+        event.preventDefault();
+        modalClose.focus();
+      }
+    }
+  }
+
+  function createFocusableDiv() {
+    const focusableDiv = document.createElement('div');
+    focusableDiv.setAttribute('tabIndex', '0');
+
+    return focusableDiv;
   }
 
   function showModal (modalTarget) {
     activeModalTarget = modalTarget;
 
     const modalWindow = findActiveModalWindow();
+
+    if (!modalWindow) return;
+
     modalWindow.classList.add('show-modal');
+
+    modalWindow.before(createFocusableDiv());
+    modalWindow.after(createFocusableDiv());
 
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     bodyEl.style.paddingRight = `${scrollbarWidth}px`;
     bodyEl.classList.add('modal-opened');
 
-    document.documentElement.addEventListener('keydown', listenToEscape)
+    document.documentElement.addEventListener('keydown', listenToKeyPress);
   }
 
   function closeModal () {
     if (!activeModalTarget) return;
 
     const modalWindow = findActiveModalWindow();
+    const modalWindowParent = modalWindow.parentElement;
+    const beforeAddedDiv = modalWindow.previousSibling;
+    const afterAddedDiv = modalWindow.nextSibling;
+
+    modalWindowParent.removeChild(beforeAddedDiv);
+    modalWindowParent.removeChild(afterAddedDiv);
+
     modalWindow.classList.remove('show-modal');
 
     bodyEl.style.paddingRight = '';
     bodyEl.classList.remove('modal-opened');
 
-    document.documentElement.removeEventListener('keydown', listenToEscape)
+    document.documentElement.removeEventListener('keydown', listenToKeyPress);
 
     activeModalTarget.focus();
     activeModalTarget = null;
