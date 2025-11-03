@@ -114,8 +114,13 @@ window.addEventListener("DOMContentLoaded", () => {
       const modalFocusableElementsLength = modalFocusableElements.length
       const currentFocusedElement = document.activeElement;
       const currentFocusedElementIndex = [...modalFocusableElements].indexOf(currentFocusedElement);
+      const isLastFocusableElementInModal = currentFocusedElementIndex === modalFocusableElementsLength - 1;
+      const isFirstFocusableElementInModal = currentFocusedElementIndex === 0;
 
-      if (currentFocusedElementIndex === modalFocusableElementsLength - 1) {
+      if (
+          (isTabPressed && isLastFocusableElementInModal)
+          || (isShiftTabPressed && isFirstFocusableElementInModal)
+      ) {
         event.preventDefault();
         modalClose.focus();
       }
