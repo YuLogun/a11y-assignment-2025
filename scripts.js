@@ -61,13 +61,14 @@ window.addEventListener("DOMContentLoaded", () => {
   let activeModalTarget = null;
   modalTarget.forEach((modalTarget)=> {
     modalTarget.addEventListener('click', ()=> {
-      const modalWindow = document.querySelector('.modal');
-      const modalClose = modalWindow.querySelector('.js__modal-close');
-      showModal(modalWindow, modalTarget);
+      showModal(modalTarget);
 
-      if (modalClose) {
-        modalClose.focus();
-      }
+      const modalWindow = findActiveModalWindow();
+      const modalClose = modalWindow.querySelector('.js__modal-close');
+
+      if (!modalClose) return;
+
+      modalClose.focus();
     });
   });
 
@@ -81,15 +82,24 @@ window.addEventListener("DOMContentLoaded", () => {
     modalClose.addEventListener('click', closeModal);
   })
 
+  function findActiveModalWindow() {
+    if (!activeModalTarget) return;
+
+    const modalId = activeModalTarget.id;
+    return document.documentElement.querySelector(`[data-modal-id=${modalId}]`)
+  }
+
   function listenToEscape(event) {
     if (event.key === 'Escape') {
       closeModal();
     }
   }
 
-  function showModal (modalWindow, modalTarget) {
-    modalWindow.classList.add('show-modal');
+  function showModal (modalTarget) {
     activeModalTarget = modalTarget;
+
+    const modalWindow = findActiveModalWindow();
+    modalWindow.classList.add('show-modal');
 
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     bodyEl.style.paddingRight = `${scrollbarWidth}px`;
@@ -101,9 +111,7 @@ window.addEventListener("DOMContentLoaded", () => {
   function closeModal () {
     if (!activeModalTarget) return;
 
-    const modalId = activeModalTarget.id;
-
-    const modalWindow = document.documentElement.querySelector(`[data-modal-id=${modalId}]`)
+    const modalWindow = findActiveModalWindow();
     modalWindow.classList.remove('show-modal');
 
     bodyEl.style.paddingRight = '';
