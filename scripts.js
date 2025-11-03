@@ -73,35 +73,43 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const modalBackdrop = document.querySelectorAll('.modal-backdrop');
   modalBackdrop.forEach((modalBackdrop)=> {
-    modalBackdrop.addEventListener('click', (e) => {
-
-      const modalWindow = e.target.closest('.modal');
-      closeModal(modalWindow);
-    });
+    modalBackdrop.addEventListener('click', closeModal);
   });
 
   const modalClose = document.querySelectorAll('.js__modal-close');
   modalClose.forEach((modalClose) => {
-    modalClose.addEventListener('click', (e) => {
-      const modalWindow = e.target.closest('.modal');
-      closeModal(modalWindow);
-    });
+    modalClose.addEventListener('click', closeModal);
   })
 
-  const showModal = (modalWindow, modalTarget) => {
+  function listenToEscape(event) {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  }
+
+  function showModal (modalWindow, modalTarget) {
     modalWindow.classList.add('show-modal');
     activeModalTarget = modalTarget;
+
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     bodyEl.style.paddingRight = `${scrollbarWidth}px`;
     bodyEl.classList.add('modal-opened');
+
+    document.documentElement.addEventListener('keydown', listenToEscape)
   }
 
-  const closeModal = (modalWindow) => {
+  function closeModal () {
+    if (!activeModalTarget) return;
+
+    const modalId = activeModalTarget.id;
+
+    const modalWindow = document.documentElement.querySelector(`[data-modal-id=${modalId}]`)
     modalWindow.classList.remove('show-modal');
+
     bodyEl.style.paddingRight = '';
     bodyEl.classList.remove('modal-opened');
 
-    if (!activeModalTarget) return;
+    document.documentElement.removeEventListener('keydown', listenToEscape)
 
     activeModalTarget.focus();
     activeModalTarget = null;

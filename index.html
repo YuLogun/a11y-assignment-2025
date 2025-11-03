@@ -147,12 +147,24 @@
 										<option value="xl">XL</option>
 									</select>
 									<div class="size-guide-open-wrapper">
-										<button type="button" class="size-guide-open modal-target">Size Guide</button>
+										<button
+											type="button"
+											class="size-guide-open modal-target"
+											id="dialog1"
+										>
+											Size Guide
+										</button>
 									</div>
-									<div class="modal">
+									<div
+										aria-modal="true"
+										aria-labelledby="modalLabel"
+										role="dialog"
+										data-modal-id="dialog1"
+										class="modal"
+									>
 										<div class="modal-backdrop">
 											<div class="modal-body size-guide">
-												<h3 class="heading-2">Size guide</h3>
+												<h3 class="heading-2" id="modalLabel">Size guide</h3>
 												<button type="button" aria-label="Close Size guide" class="modal-close js__modal-close">
 													<span aria-hidden="true">&#x2715;</span>
 												</button>
