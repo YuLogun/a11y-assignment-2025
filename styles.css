@@ -801,6 +801,10 @@ a:not(:has(*)):focus-visible {
   display: block;
 }
 
+.modal-opened {
+  overflow: hidden;
+}
+
 .size-guide__table tr:first-child td {
   font-weight: bold;
 }

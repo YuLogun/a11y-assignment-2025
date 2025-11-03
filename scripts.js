@@ -55,6 +55,8 @@ window.addEventListener("DOMContentLoaded", () => {
     });    
   });
 
+  const bodyEl = document.body;
+
   const modalTarget = document.querySelectorAll('.modal-target');
   let activeModalTarget = null;
   modalTarget.forEach((modalTarget)=> {
@@ -89,10 +91,15 @@ window.addEventListener("DOMContentLoaded", () => {
   const showModal = (modalWindow, modalTarget) => {
     modalWindow.classList.add('show-modal');
     activeModalTarget = modalTarget;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    bodyEl.style.paddingRight = `${scrollbarWidth}px`;
+    bodyEl.classList.add('modal-opened');
   }
 
   const closeModal = (modalWindow) => {
     modalWindow.classList.remove('show-modal');
+    bodyEl.style.paddingRight = '';
+    bodyEl.classList.remove('modal-opened');
 
     if (!activeModalTarget) return;
 
