@@ -56,24 +56,47 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   const modalTarget = document.querySelectorAll('.modal-target');
+  let activeModalTarget = null;
   modalTarget.forEach((modalTarget)=> {
-    modalTarget.addEventListener('click', ()=>{
+    modalTarget.addEventListener('click', ()=> {
       const modalWindow = document.querySelector('.modal');
-      showModal(modalWindow);
+      const modalClose = modalWindow.querySelector('.js__modal-close');
+      showModal(modalWindow, modalTarget);
+
+      if (modalClose) {
+        modalClose.focus();
+      }
     });
   });
+
   const modalBackdrop = document.querySelectorAll('.modal-backdrop');
   modalBackdrop.forEach((modalBackdrop)=> {
     modalBackdrop.addEventListener('click', (e) => {
 
       const modalWindow = e.target.closest('.modal');
-      modalWindow.classList.remove('show-modal');
+      closeModal(modalWindow);
     });
   });
 
-  const showModal = (modalWindow) => {
+  const modalClose = document.querySelectorAll('.js__modal-close');
+  modalClose.forEach((modalClose) => {
+    modalClose.addEventListener('click', (e) => {
+      const modalWindow = e.target.closest('.modal');
+      closeModal(modalWindow);
+    });
+  })
+
+  const showModal = (modalWindow, modalTarget) => {
     modalWindow.classList.add('show-modal');
+    activeModalTarget = modalTarget;
   }
 
+  const closeModal = (modalWindow) => {
+    modalWindow.classList.remove('show-modal');
 
+    if (!activeModalTarget) return;
+
+    activeModalTarget.focus();
+    activeModalTarget = null;
+  }
 })
