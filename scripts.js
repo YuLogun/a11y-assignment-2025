@@ -10,6 +10,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const inputsQuantity = document.querySelectorAll('.input-quantity');
   inputsQuantity.forEach((input) => {
     const inputField = input.querySelector('.input-quantity__field');
+    const quantityLiveRegion = input.querySelector('.js__quantity-live-region');
     const inputBtnIncrease = input.querySelector('.input-quantity__btn[data-action=increase]');
     const inputBtnDecrease = input.querySelector('.input-quantity__btn[data-action=decrease]');
 
@@ -23,22 +24,38 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     }
 
+    function setLiveRegionText(text) {
+      quantityLiveRegion.textContent = text;
+    }
+
+    function clearLiveRegion() {
+      setLiveRegionText('');
+    }
+
     inputField.addEventListener('input', (evt) => {
       toggleDecreaseBtnAttrs(evt.target.value)
     });
+
     inputBtnIncrease.addEventListener('click', () => {
       const initialValue = inputField.value * 1;
       const newValue = initialValue + 1;
       inputField.value = newValue;
-      toggleDecreaseBtnAttrs(newValue)
+      toggleDecreaseBtnAttrs(newValue);
+      setLiveRegionText('Quantity ' + newValue);
     });
     inputBtnDecrease.addEventListener('click', () => {
       const initialValue = inputField.value * 1;
       const newValue = initialValue - 1;
-      toggleDecreaseBtnAttrs(newValue)
+      toggleDecreaseBtnAttrs(newValue);
 
-      if (newValue > 0) inputField.value = newValue;
-    });    
+      if (newValue > 0) {
+        inputField.value = newValue;
+        setLiveRegionText('Quantity ' + newValue);
+      }
+    });
+
+    inputBtnIncrease.addEventListener('blur', clearLiveRegion);
+    inputBtnDecrease.addEventListener('blur', clearLiveRegion);
   });
 
   const accordions = document.querySelectorAll('.accordion__item');
