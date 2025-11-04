@@ -334,13 +334,15 @@
 								</p>
 							</div>
 							<div class="products-grid__item">
-								<ul class="product-tags products-grid__item-product-tags">
+								<ul class="product-tags products-grid__item-product-tags" aria-hidden="true" id="productDescription3">
 									<li class="product-tags__item">Sold out</li>
 								</ul>
 								<a href="#" tabindex="-1" class="products-grid__item-photo" aria-hidden="true">
 									<img src="images/photo4.jpg" class="products-grid__item-picture" srcset="images/photo4_x2.jpg 2x" alt="">
 								</a>
-								<h3 class="products-grid__item-name"><a href="#">Product name</a></h3>
+								<h3 class="products-grid__item-name">
+									<a href="#" aria-describedby="productDescription3">Product name</a>
+								</h3>
 								<ul aria-label="Product name colors" class="colors-palette products-grid__item-colors-palette">
 									<li class="colors-palette__item">
 										<span class="colors-palette__sample" style="background-color: #C88252;"></span>
